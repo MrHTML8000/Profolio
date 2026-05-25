@@ -67,53 +67,13 @@
   .cursor-ring.active { width:50px; height:50px; border-color:rgba(0,212,255,.4); }
 
   /* ── BACKGROUND ── */
-  /* Deep space gradient */
   .bg-gradient {
     position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:
-      radial-gradient(ellipse 80% 50% at 80% -10%, rgba(0,80,180,.18) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at -10% 80%, rgba(80,0,180,.15) 0%, transparent 55%),
-      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(0,30,80,.25) 0%, transparent 70%),
-      linear-gradient(160deg, #04040a 0%, #06061a 50%, #040410 100%);
+    background: linear-gradient(160deg, #02020a 0%, #04041a 50%, #020210 100%);
   }
-
-  /* Aurora bands */
-  .aurora {
-    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-  }
-  .aurora-band {
-    position:absolute; border-radius:50%;
-    filter:blur(80px); opacity:0;
-    animation:auroraFloat 0s ease-in-out infinite;
-  }
-  .ab1 { width:700px; height:200px; background:linear-gradient(90deg,transparent,rgba(0,255,170,.07),rgba(0,212,255,.09),transparent); top:15%; left:-10%; animation-duration:14s; animation-delay:0s; }
-  .ab2 { width:900px; height:180px; background:linear-gradient(90deg,transparent,rgba(176,109,255,.07),rgba(77,143,255,.08),transparent); top:40%; right:-15%; animation-duration:18s; animation-delay:-6s; }
-  .ab3 { width:600px; height:150px; background:linear-gradient(90deg,transparent,rgba(0,255,170,.05),rgba(176,109,255,.06),transparent); bottom:20%; left:10%; animation-duration:22s; animation-delay:-10s; }
-  @keyframes auroraFloat {
-    0%   { opacity:0; transform:translateX(0) scaleY(1); }
-    20%  { opacity:1; }
-    50%  { transform:translateX(60px) scaleY(1.3); }
-    80%  { opacity:1; }
-    100% { opacity:0; transform:translateX(0) scaleY(1); }
-  }
-
-  /* Animated stars */
-  .stars { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-  .star {
-    position:absolute; border-radius:50%;
-    background:white; animation:starTwinkle linear infinite;
-  }
-
-  /* Glow orbs — more dramatic */
-  .orb { position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0; }
-  .orb1 { width:700px; height:700px; background:radial-gradient(circle,rgba(0,255,170,.12),transparent 70%); top:-250px; right:-200px; animation:orbDrift 12s ease-in-out infinite; }
-  .orb2 { width:500px; height:500px; background:radial-gradient(circle,rgba(77,143,255,.1),transparent 70%); bottom:-100px; left:-150px; animation:orbDrift 16s ease-in-out infinite reverse; }
-  .orb3 { width:400px; height:400px; background:radial-gradient(circle,rgba(176,109,255,.1),transparent 70%); top:40%; left:35%; animation:orbDrift 20s ease-in-out infinite 4s; }
-  .orb4 { width:300px; height:300px; background:radial-gradient(circle,rgba(255,62,164,.07),transparent 70%); top:20%; left:60%; animation:orbDrift 14s ease-in-out infinite 2s; }
-  @keyframes orbDrift {
-    0%,100% { transform:translate(0,0) scale(1); }
-    33%     { transform:translate(40px,-50px) scale(1.1); }
-    66%     { transform:translate(-30px,30px) scale(.95); }
+  #bgCanvas {
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    width:100%; height:100%;
   }
 
   /* Grid — dual-layer */
@@ -447,6 +407,50 @@
   .chip-db .tech-chip::after { background:linear-gradient(90deg,var(--purple),var(--blue)); }
   .chip-db .tech-chip:hover { color:var(--purple); }
 
+  /* ── MY APPS ── */
+  .apps-section { padding:5rem 0; position:relative; z-index:2; }
+  .apps-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .app-card {
+    display:flex; align-items:center; gap:1.4rem;
+    padding:1.6rem 1.8rem;
+    background:rgba(13,13,28,.85);
+    border:1px solid var(--border);
+    border-radius:16px; text-decoration:none;
+    transition:all .3s cubic-bezier(.34,1.56,.64,1);
+    position:relative; overflow:hidden;
+    backdrop-filter:blur(10px);
+  }
+  .app-card::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.03) 50%,transparent 100%);
+    transform:translateX(-100%); transition:transform .5s ease;
+  }
+  .app-card::after {
+    content:''; position:absolute; bottom:0; left:10%; right:10%; height:1px;
+    background:linear-gradient(90deg,transparent,currentColor,transparent);
+    opacity:0; transition:opacity .3s;
+  }
+  .app-card:hover::before { transform:translateX(100%); }
+  .app-card:hover::after  { opacity:.5; }
+  .app-card:hover { transform:translateY(-5px) scale(1.01); }
+  .app-card.gplay  { --hc:#00e676; }
+  .app-card.itchio { --hc:#ff3f66; }
+  .app-card:hover { border-color:var(--hc); box-shadow:0 0 24px color-mix(in srgb,var(--hc) 25%,transparent), 0 12px 40px color-mix(in srgb,var(--hc) 12%,transparent), inset 0 0 30px color-mix(in srgb,var(--hc) 4%,transparent); }
+  .app-icon {
+    width:58px; height:58px; border-radius:14px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; background:var(--bg3);
+    border:1px solid var(--border); transition:all .3s;
+  }
+  .app-card:hover .app-icon { transform:scale(1.15) rotate(-5deg); border-color:var(--hc); }
+  .app-info { flex:1; min-width:0; }
+  .app-platform { font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; transition:color .3s; }
+  .app-desc { font-size:12px; color:var(--muted); line-height:1.5; transition:color .3s; }
+  .app-card:hover .app-platform { color:var(--hc); text-shadow:0 0 12px color-mix(in srgb,var(--hc) 50%,transparent); }
+  .app-card:hover .app-desc { color:var(--dim); }
+  .app-arrow { font-size:18px; color:var(--muted); margin-left:auto; flex-shrink:0; transition:transform .3s cubic-bezier(.34,1.56,.64,1), color .3s; }
+  .app-card:hover .app-arrow { transform:translate(4px,-4px) scale(1.2); color:var(--hc); }
+
   /* ── FOOTER ── */
   footer {
     border-top:1px solid rgba(0,255,170,.08); padding:2.5rem 0;
@@ -484,17 +488,8 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="bg-gradient"></div>
-<div class="aurora">
-  <div class="aurora-band ab1"></div>
-  <div class="aurora-band ab2"></div>
-  <div class="aurora-band ab3"></div>
-</div>
-<div class="stars" id="stars"></div>
+<canvas id="bgCanvas"></canvas>
 <div class="grid-bg"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-<div class="orb orb4"></div>
 
 <!-- NAV -->
 <nav>
@@ -502,6 +497,7 @@
     <a href="#" class="nav-logo">&lt;<span>MrHTML</span>/&gt;</a>
     <ul class="nav-links">
       <li><a href="#connect">Connect</a></li>
+      <li><a href="#apps">Apps</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#stack">Stack</a></li>
     </ul>
@@ -545,6 +541,37 @@
     </div>
   </div>
 </div>
+
+<div class="divider"></div>
+
+<!-- MY APPS -->
+<section id="apps" class="apps-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">// my apps &amp; games</div>
+      <h2 class="section-title">Things I've<br>Shipped</h2>
+      <p class="section-desc">Real apps. Real games. Built solo, shipped to the world. Check them out and let me know what you think.</p>
+    </div>
+    <div class="apps-grid reveal rd1">
+      <a href="https://play.google.com/store/apps/dev?id=7957181994158624444" target="_blank" class="app-card gplay">
+        <div class="app-icon" style="background:rgba(0,230,118,.08)">&#127381;</div>
+        <div class="app-info">
+          <div class="app-platform">Google Play Store</div>
+          <div class="app-desc">All my Android apps &mdash; browse my full collection on the Play Store</div>
+        </div>
+        <div class="app-arrow">&#8599;</div>
+      </a>
+      <a href="https://mrhtml.itch.io/lapse-last-carrier" target="_blank" class="app-card itchio">
+        <div class="app-icon" style="background:rgba(255,63,102,.08)">&#127918;</div>
+        <div class="app-info">
+          <div class="app-platform">Lapse: Last Carrier</div>
+          <div class="app-desc">My indie game &mdash; available on itch.io &middot; mrhtml.itch.io</div>
+        </div>
+        <div class="app-arrow">&#8599;</div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <div class="divider"></div>
 
@@ -698,34 +725,220 @@
 </footer>
 
 <script>
-  // Stars
-  const starsEl = document.getElementById('stars');
-  for(let i=0;i<120;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random()*2+.5;
-    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
-    starsEl.appendChild(s);
-  }
+  // ── GALAXY + WAVE CANVAS BACKGROUND ──
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, mx = 0, my = 0;
 
-  // Custom cursor
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  // ── STARS ──
+  const STAR_COUNT = 220;
+  let stars = [];
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.5 + 0.2,
+        speed: Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: Math.random() * 0.03 + 0.01,
+        color: ['#ffffff','#aaddff','#ccffee','#ddccff'][Math.floor(Math.random()*4)],
+      });
+    }
+  }
+  initStars();
+
+  // ── NEBULA CLOUDS ──
+  const nebulas = [
+    { x:0.8, y:0.1, r:0.45, c1:'rgba(0,80,200,0.18)',  c2:'rgba(0,200,150,0.08)' },
+    { x:0.1, y:0.75,r:0.4,  c1:'rgba(100,0,200,0.14)', c2:'rgba(0,100,255,0.07)' },
+    { x:0.5, y:0.5, r:0.35, c1:'rgba(0,40,120,0.12)',  c2:'transparent' },
+    { x:0.9, y:0.6, r:0.3,  c1:'rgba(180,0,255,0.08)', c2:'transparent' },
+  ];
+
+  // ── SHOOTING STARS ──
+  let shooters = [];
+  function spawnShooter() {
+    shooters.push({
+      x: Math.random() * W,
+      y: Math.random() * H * 0.5,
+      vx: 6 + Math.random() * 6,
+      vy: 2 + Math.random() * 3,
+      len: 80 + Math.random() * 120,
+      life: 1,
+      decay: 0.025 + Math.random() * 0.02,
+    });
+  }
+  setInterval(spawnShooter, 2200);
+
+  // ── WAVE PARTICLES ──
+  const WAVE_COUNT = 5;
+  const waves = Array.from({length: WAVE_COUNT}, (_, i) => ({
+    offset:  i * (Math.PI * 2 / WAVE_COUNT),
+    speed:   0.0004 + i * 0.00015,
+    amp:     28 + i * 12,
+    freq:    0.006 + i * 0.002,
+    yBase:   0.55 + i * 0.09,
+    color:   [
+      'rgba(0,255,170,0.04)',
+      'rgba(0,212,255,0.035)',
+      'rgba(176,109,255,0.03)',
+      'rgba(77,143,255,0.025)',
+      'rgba(255,62,164,0.02)',
+    ][i],
+    glow: [
+      'rgba(0,255,170,0.12)',
+      'rgba(0,212,255,0.10)',
+      'rgba(176,109,255,0.09)',
+      'rgba(77,143,255,0.08)',
+      'rgba(255,62,164,0.06)',
+    ][i],
+  }));
+
+  // ── FLOATING ORBS ──
+  const orbs = [
+    { x:0.8,  y:0.0,  r:340, c:'rgba(0,255,170,0.10)',  vx:0.00012, vy:0.00008 },
+    { x:0.0,  y:0.85, r:260, c:'rgba(77,143,255,0.09)',  vx:-0.00008,vy:-0.00010 },
+    { x:0.45, y:0.45, r:200, c:'rgba(176,109,255,0.08)', vx:0.00006, vy:0.00012 },
+    { x:0.65, y:0.25, r:160, c:'rgba(255,62,164,0.06)',  vx:-0.00010,vy:0.00007 },
+  ];
+  let orbTime = 0;
+
+  let t = 0;
+
+  function draw() {
+    t += 0.008;
+    orbTime += 0.005;
+    ctx.clearRect(0, 0, W, H);
+
+    // ── nebulas ──
+    nebulas.forEach(n => {
+      const grd = ctx.createRadialGradient(n.x*W, n.y*H, 0, n.x*W, n.y*H, n.r*Math.max(W,H));
+      grd.addColorStop(0, n.c1);
+      grd.addColorStop(1, n.c2);
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, W, H);
+    });
+
+    // ── floating orbs ──
+    orbs.forEach((o, i) => {
+      const cx = o.x*W + Math.sin(orbTime * 1.2 + i) * W * 0.06;
+      const cy = o.y*H + Math.cos(orbTime * 0.9 + i*1.3) * H * 0.08;
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, o.r);
+      grd.addColorStop(0, o.c);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(cx, cy, o.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    // ── mouse interactive glow ──
+    const mgrd = ctx.createRadialGradient(mx, my, 0, mx, my, 220);
+    mgrd.addColorStop(0, 'rgba(0,255,170,0.055)');
+    mgrd.addColorStop(1, 'transparent');
+    ctx.fillStyle = mgrd;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── stars ──
+    stars.forEach(s => {
+      s.twinkle += s.twinkleSpeed;
+      s.y -= s.speed;
+      if (s.y < -2) { s.y = H + 2; s.x = Math.random() * W; }
+      const alpha = 0.4 + 0.6 * Math.abs(Math.sin(s.twinkle));
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = s.color;
+      ctx.shadowColor = s.color;
+      ctx.shadowBlur = s.r * 3;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // ── shooting stars ──
+    shooters = shooters.filter(s => s.life > 0);
+    shooters.forEach(s => {
+      s.x += s.vx;
+      s.y += s.vy;
+      s.life -= s.decay;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx*(s.len/s.vx||10), s.y - s.vy*(s.len/s.vx||10));
+      grad.addColorStop(0, `rgba(255,255,255,${s.life * 0.9})`);
+      grad.addColorStop(0.4, `rgba(180,240,255,${s.life * 0.4})`);
+      grad.addColorStop(1, 'transparent');
+      ctx.save();
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - s.vx * (s.len/Math.max(s.vx,1)), s.y - s.vy * (s.len/Math.max(s.vx,1)));
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    // ── waves ──
+    waves.forEach(w => {
+      const yBase = w.yBase * H;
+      // glow pass (wider, more transparent)
+      ctx.save();
+      ctx.strokeStyle = w.glow;
+      ctx.lineWidth = 6;
+      ctx.shadowColor = w.glow;
+      ctx.shadowBlur = 18;
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 2) {
+        const y = yBase + Math.sin(x * w.freq + t * (w.speed * 800) + w.offset) * w.amp
+                        + Math.sin(x * w.freq * 0.5 + t * (w.speed * 400) + w.offset * 1.3) * (w.amp * 0.4);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.restore();
+      // sharp pass
+      ctx.save();
+      ctx.strokeStyle = w.color;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 2) {
+        const y = yBase + Math.sin(x * w.freq + t * (w.speed * 800) + w.offset) * w.amp
+                        + Math.sin(x * w.freq * 0.5 + t * (w.speed * 400) + w.offset * 1.3) * (w.amp * 0.4);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // ── CUSTOM CURSOR ──
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
-  (function animRing(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+  let cmx=0,cmy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{ cmx=e.clientX; cmy=e.clientY; cursor.style.left=cmx+'px'; cursor.style.top=cmy+'px'; });
+  (function animRing(){ rx+=(cmx-rx)*0.1; ry+=(cmy-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
   document.querySelectorAll('a,button').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ cursor.classList.add('active'); ring.classList.add('active'); });
     el.addEventListener('mouseleave',()=>{ cursor.classList.remove('active'); ring.classList.remove('active'); });
   });
 
-  // Scroll reveal
+  // ── SCROLL REVEAL ──
   const obs = new IntersectionObserver(entries=>{
     entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); });
   },{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-  // Terminal typing
+  // ── TERMINAL TYPING ──
   document.querySelectorAll('.t-cmd').forEach((cmd,i)=>{
     const text=cmd.textContent; cmd.textContent=''; let j=0;
     setTimeout(()=>{ const iv=setInterval(()=>{ cmd.textContent+=text[j]; j++; if(j>=text.length)clearInterval(iv); },40); },800+i*300);

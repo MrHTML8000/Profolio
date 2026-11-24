@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mr. HTML — Solo Developer</title>
-<meta name="description" content="Mr. HTML is a solo developer with 10 years of IT experience, building Android apps and games across multiple tech stacks. Follow the solo dev journey.">
+<meta name="description" content="Mr. HTML is a solo developer with 10 years of IT experience, working as an automation engineer building CI/CD pipelines, plus Android apps and AI video projects.">
 <meta name="keywords" content="solo developer, android app developer, indie game developer, Mr HTML, android games, build in public, mobile game developer, indie developer philippines">
 <meta name="author" content="Mr. HTML">
 <meta property="og:title" content="Mr. HTML — Solo Developer">
@@ -182,6 +182,7 @@
   .cc-tw  { --hc: #1da1f2; }
   .cc-tt  { --hc: #ff3fa4; }
   .cc-fb  { --hc: #1877f2; }
+  .connect-grid .cc-fb:last-child { grid-column:1 / -1; }
   .cc-dc  { --hc: #7289da; grid-column:1 / -1; background:linear-gradient(135deg,rgba(114,137,218,.06),rgba(114,137,218,.02)); border-color:rgba(114,137,218,.2); }
 
   .connect-card:hover { color:var(--hc); border-color:var(--hc); box-shadow:0 0 24px color-mix(in srgb,var(--hc) 30%,transparent), 0 12px 40px color-mix(in srgb,var(--hc) 15%,transparent), inset 0 0 30px color-mix(in srgb,var(--hc) 4%,transparent); }
@@ -193,8 +194,10 @@
     border:1px solid var(--border);
     transition:all .3s; position:relative; overflow:hidden;
   }
+  .cc-icon.cc-photo { width:72px; height:72px; border-radius:14px; }
+  .cc-icon img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; }
   .cc-icon::after {
-    content:''; position:absolute; inset:0; border-radius:12px;
+    content:''; position:absolute; inset:0; border-radius:12px; z-index:2;
     background:radial-gradient(circle at center, color-mix(in srgb,var(--hc) 20%,transparent), transparent 70%);
     opacity:0; transition:opacity .3s;
   }
@@ -356,6 +359,18 @@
   .about-card-text { font-size:12px; color:var(--dim); line-height:1.7; }
 
   /* ── TECH STACK with EPIC HOVER ── */
+  /* PIPELINE */
+  .pipeline-section { padding:5rem 0; position:relative; z-index:2; }
+  .pipeline { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:2.5rem; counter-reset:step; }
+  .pipe-step { position:relative; padding:1.4rem 1.2rem; background:rgba(13,13,20,.8); border:1px solid var(--border); border-radius:14px; transition:all .3s; }
+  .pipe-step:hover { transform:translateY(-5px); border-color:rgba(0,255,170,.3); box-shadow:0 12px 30px rgba(0,0,0,.4), 0 0 20px rgba(0,255,170,.08); }
+  .pipe-step::before { counter-increment:step; content:"0" counter(step); font-size:11px; color:var(--green); letter-spacing:.1em; display:block; margin-bottom:.6rem; }
+  .pipe-step:not(:last-child)::after { content:"\2192"; position:absolute; right:-13px; top:50%; transform:translateY(-50%); color:var(--green); font-size:14px; z-index:3; }
+  .pipe-icon { font-size:24px; display:block; margin-bottom:.6rem; }
+  .pipe-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:.4rem; }
+  .pipe-text { font-size:11px; color:var(--dim); line-height:1.6; }
+  @media (max-width:900px) { .pipeline { grid-template-columns:1fr 1fr; } .pipe-step::after { display:none; } }
+  @media (max-width:560px) { .pipeline { grid-template-columns:1fr; } }
   .tech-section { padding:5rem 0; position:relative; z-index:2; }
   .tech-categories { display:flex; flex-direction:column; gap:2.5rem; }
   .tech-cat-label {
@@ -499,43 +514,44 @@
       <li><a href="#connect">Connect</a></li>
       <li><a href="#apps">Apps</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#pipeline">Pipeline</a></li>
       <li><a href="#stack">Stack</a></li>
     </ul>
-    <a href="https://discord.gg/f7rvBhVHnv" target="_blank" class="nav-cta">&#128027; Report Bug</a>
+    <a href="#connect" class="nav-cta">&#128216; Our Pages</a>
   </div>
 </nav>
 
 <!-- ── CONNECT — FIRST ── -->
 <div class="connect-section" id="connect">
   <div class="container">
-    <div class="connect-eyebrow">// find me online</div>
+    <div class="connect-eyebrow">// my projects</div>
     <h1 class="connect-title">Let's<br><span class="grad">Connect</span></h1>
-    <p class="connect-desc">Follow the solo dev journey &mdash; gameplay clips, dev logs, app builds, and the occasional <em>existential crisis</em> when something breaks at 2am. Pick your platform.</p>
+    <p class="connect-desc">A collection of Facebook pages built with <em>AI-created videos</em> &mdash; stories, life lessons and cozy scenes. Pick a page and follow along.</p>
 
     <div class="connect-grid">
-      <a href="https://www.youtube.com/@MrHTML8000" target="_blank" class="connect-card cc-yt">
-        <div class="cc-icon" style="background:rgba(255,0,0,.08)">&#9654;&#65039;</div>
-        <div class="cc-info"><div class="cc-platform">YouTube</div><div class="cc-handle">@MrHTML8000 &mdash; Dev logs &amp; gameplay</div></div>
+      <a href="https://www.facebook.com/profile.php?id=61596590407226" target="_blank" rel="noopener" class="connect-card cc-fb">
+        <div class="cc-icon cc-photo" style="background:rgba(24,119,242,.08)">&#127918;<img src="1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="cc-info"><div class="cc-platform">Tiny Pixel Tales</div><div class="cc-handle">AI-created videos &mdash; Facebook Page</div></div>
         <div class="cc-arrow">&#8599;</div>
       </a>
-      <a href="https://x.com/MrHtml8000" target="_blank" class="connect-card cc-tw">
-        <div class="cc-icon" style="background:rgba(29,161,242,.08);font-size:20px;font-weight:700;">𝕏</div>
-        <div class="cc-info"><div class="cc-platform">Twitter / X</div><div class="cc-handle">@MrHtml8000 &mdash; Updates &amp; thoughts</div></div>
+      <a href="https://www.facebook.com/profile.php?id=61594290887433" target="_blank" rel="noopener" class="connect-card cc-fb">
+        <div class="cc-icon cc-photo" style="background:rgba(24,119,242,.08)">&#128116;<img src="2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="cc-info"><div class="cc-platform">Mang Bert AI</div><div class="cc-handle">AI-created videos &mdash; Facebook Page</div></div>
         <div class="cc-arrow">&#8599;</div>
       </a>
-      <a href="https://www.tiktok.com/@mr_html8000" target="_blank" class="connect-card cc-tt">
-        <div class="cc-icon" style="background:rgba(255,63,164,.08)">&#127925;</div>
-        <div class="cc-info"><div class="cc-platform">TikTok</div><div class="cc-handle">@mr_html8000 &mdash; Short clips</div></div>
+      <a href="https://www.facebook.com/profile.php?id=61596174650542" target="_blank" rel="noopener" class="connect-card cc-fb">
+        <div class="cc-icon cc-photo" style="background:rgba(24,119,242,.08)">&#127807;<img src="3.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="cc-info"><div class="cc-platform">Quiet Days</div><div class="cc-handle">AI-created videos &mdash; Facebook Page</div></div>
         <div class="cc-arrow">&#8599;</div>
       </a>
-      <a href="https://www.facebook.com/MrHTML8000/" target="_blank" class="connect-card cc-fb">
-        <div class="cc-icon" style="background:rgba(24,119,242,.08)">&#128216;</div>
-        <div class="cc-info"><div class="cc-platform">Facebook</div><div class="cc-handle">MrHTML8000 &mdash; Community &amp; Reels</div></div>
+      <a href="https://www.facebook.com/profile.php?id=61596246118022" target="_blank" rel="noopener" class="connect-card cc-fb">
+        <div class="cc-icon cc-photo" style="background:rgba(24,119,242,.08)">&#128058;<img src="4.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="cc-info"><div class="cc-platform">Quiet Beast</div><div class="cc-handle">AI-created videos &mdash; Facebook Page</div></div>
         <div class="cc-arrow">&#8599;</div>
       </a>
-      <a href="https://discord.gg/f7rvBhVHnv" target="_blank" class="connect-card cc-dc">
-        <div class="cc-icon" style="background:rgba(114,137,218,.12)">&#128027;</div>
-        <div class="cc-info"><div class="cc-platform">Discord &mdash; Bug Reports &amp; Community</div><div class="cc-handle">Found a bug? Come report it here &mdash; discord.gg/f7rvBhVHnv</div></div>
+      <a href="https://www.facebook.com/profile.php?id=61596486745176" target="_blank" rel="noopener" class="connect-card cc-fb">
+        <div class="cc-icon cc-photo" style="background:rgba(24,119,242,.08)">&#10024;<img src="5.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="cc-info"><div class="cc-platform">Ashley Sibylla</div><div class="cc-handle">AI-created videos &mdash; Facebook Page</div></div>
         <div class="cc-arrow">&#8599;</div>
       </a>
     </div>
@@ -590,14 +606,15 @@
   <div class="container">
     <div class="hero-layout">
       <div class="hero-left reveal">
-        <div class="hero-eyebrow"><span></span> Solo Developer &middot; Philippines</div>
+        <div class="hero-eyebrow"><span></span> Automation Engineer &middot; Philippines</div>
         <h2 class="hero-name">
           <span class="line1">MR.</span>
           <span class="line2">HTML</span>
         </h2>
-        <p class="hero-tagline">Solo dev with <em>10 years in IT</em>, now building Android apps &amp; games. Shipping projects across different tech stacks &mdash; one dev, zero excuses. I probably bleed CSS. &#127918;</p>
+        <p class="hero-tagline">Automation engineer with <em>10 years in IT</em>. I design fully automated <em>CI/CD pipelines</em> from scratch &mdash; build, deploy, test, report &mdash; and build Android apps &amp; AI video projects on the side. &#9881;&#65039;</p>
         <div class="hero-actions">
           <a href="#about" class="btn-primary">My Story &rarr;</a>
+          <a href="#pipeline" class="btn-secondary">View Pipeline</a>
           <a href="#stack" class="btn-secondary">View Stack</a>
         </div>
       </div>
@@ -611,11 +628,11 @@
           </div>
           <div class="terminal-body">
             <div class="t-line"><span class="t-prompt">~$</span><span class="t-cmd">whoami</span></div>
-            <div class="t-output">Mr. HTML &mdash; Solo Developer</div>
+            <div class="t-output">Mr. HTML &mdash; Automation Engineer</div>
             <div class="t-line"><span class="t-prompt">~$</span><span class="t-cmd">cat experience.txt</span></div>
             <div class="t-output"><span class="t-val">10 years</span> in IT industry</div>
             <div class="t-line"><span class="t-prompt">~$</span><span class="t-cmd">cat focus.txt</span></div>
-            <div class="t-output">Android Apps &middot; Games &middot; Multi tech-stack</div>
+            <div class="t-output">CI/CD &middot; Test Automation &middot; Android Apps</div>
             <div class="t-line"><span class="t-prompt">~$</span><span class="t-cmd">cat motto.txt</span></div>
             <div class="t-output"><span class="t-val">"One dev. Many stacks. Zero chill."</span></div>
             <div class="t-line"><span class="t-prompt">~$</span><span class="t-cursor"></span></div>
@@ -625,7 +642,7 @@
           <div class="profile-card-top">
             <div class="avatar">M</div>
             <div class="profile-name">&lt;MrHTML/&gt;</div>
-            <div class="profile-title">Solo Developer &middot; Philippines</div>
+            <div class="profile-title">Automation Engineer &middot; Philippines</div>
           </div>
           <div class="profile-card-body">
             <div class="profile-stat-row">
@@ -634,15 +651,16 @@
               <div class="p-stat"><div class="p-stat-num">&#x221e;</div><div class="p-stat-label">Stacks</div></div>
             </div>
             <div class="profile-tags">
-              <span class="ptag green">Android</span>
-              <span class="ptag cyan">Game Dev</span>
-              <span class="ptag orange">Build in Public</span>
+              <span class="ptag green">Automation</span>
+              <span class="ptag cyan">CI/CD</span>
+              <span class="ptag">Android</span>
+                            <span class="ptag orange">Build in Public</span>
               <span class="ptag">Multi Stack</span>
               <span class="ptag">Solo</span>
             </div>
             <div class="avail-row">
               <div class="avail-dot"></div>
-              <div class="avail-text">Shipping apps &amp; games in 2025</div>
+              <div class="avail-text">Automating builds, deploys &amp; tests</div>
             </div>
           </div>
         </div>
@@ -662,10 +680,31 @@
       <p class="section-desc">Hey, I'm Mr. HTML &mdash; yes, that's my name, and yes, I probably bleed CSS. With 10 years of surviving the IT industry, I've seen technologies rise, fall, and get replaced by something that does the exact same thing but with a cooler name.</p>
     </div>
     <div class="about-grid reveal rd1">
+      <div class="about-card" style="grid-column:1 / -1"><span class="about-card-icon">&#9881;&#65039;</span><div class="about-card-title">Automation Engineer &mdash; Main Role</div><div class="about-card-text">Designed and implemented fully automated CI/CD pipelines from scratch, covering integration, automated testing, and deployment processes. Batch and shell scripts build the project, deploy it to the production server, insert data into the database for the automation scripts to test, then send the results.</div></div>
       <div class="about-card"><span class="about-card-icon">&#127918;</span><div class="about-card-title">Game Developer</div><div class="about-card-text">Building Android games solo &mdash; from concept to launch. Every mechanic, every pixel, every bug at 2am is all me.</div></div>
       <div class="about-card"><span class="about-card-icon">&#128241;</span><div class="about-card-title">Android Developer</div><div class="about-card-text">Focused on Android app development. Turning ideas into apps that actually work on real devices with real users.</div></div>
       <div class="about-card"><span class="about-card-icon">&#9889;</span><div class="about-card-title">Multi Tech-Stack</div><div class="about-card-text">One tech stack wasn't painful enough. I work across different technologies because variety is the spice of debugging.</div></div>
       <div class="about-card"><span class="about-card-icon">&#127760;</span><div class="about-card-title">Build in Public</div><div class="about-card-text">I share everything &mdash; the wins, the bugs that make no sense, and the "why is this working now" moments. No filter.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIPELINE -->
+<section id="pipeline" class="pipeline-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">// ci/cd pipeline</div>
+      <h2 class="section-title">Build. Deploy.<br>Test. Report.</h2>
+      <p class="section-desc">A fully automated pipeline driven by batch and shell scripts &mdash; from a new build all the way to test results in my inbox, with no manual steps.</p>
+    </div>
+    <div class="pipeline reveal rd1">
+      <div class="pipe-step"><span class="pipe-icon">&#128296;</span><div class="pipe-title">Build</div><div class="pipe-text">Batch / shell script builds the project</div></div>
+      <div class="pipe-step"><span class="pipe-icon">&#128640;</span><div class="pipe-title">Deploy</div><div class="pipe-text">Production build deployed to the server</div></div>
+      <div class="pipe-step"><span class="pipe-icon">&#128451;&#65039;</span><div class="pipe-title">Insert Data</div><div class="pipe-text">Test data inserted into the database</div></div>
+      <div class="pipe-step"><span class="pipe-icon">&#129514;</span><div class="pipe-title">Automated Tests</div><div class="pipe-text">Automation scripts run against the deployment</div></div>
+      <div class="pipe-step"><span class="pipe-icon">&#128232;</span><div class="pipe-title">Send Result</div><div class="pipe-text">Test results sent out automatically</div></div>
     </div>
   </div>
 </section>
@@ -702,6 +741,8 @@
         <div class="tech-grid">
           <div class="tech-chip"><span class="tech-dot"></span>Jenkins</div>
           <div class="tech-chip"><span class="tech-dot"></span>Robot Framework</div>
+          <div class="tech-chip"><span class="tech-dot"></span>Batch</div>
+          <div class="tech-chip"><span class="tech-dot"></span>Shell</div>
         </div>
       </div>
 
